@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+    
+    <title>0718聊天室登陆</title>
+    <script src="scripts/rem.js"></script>
+    <link rel="stylesheet" href="style/iconfont.css">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+    <style type="text/css">
+     .u{
+      display:flex;
+      justify-content: space-around;
+     }
+     .u button{
+       width:20%;
+     }
+     .u button:nth-child(2){
+        background: orange
+      }
+    </style>
+</head>
+<body>
+    <div id="login">
+        <div class="container">
+            <form>
+                  <h1>用户登陆<small>欢迎您登陆0718</small></h1>
+                  <label for="">
+                      <input type="text" name="username" placeholder="请输入您的帐号">
+                  </label>
+                  <label for="">
+                      <input type="password" name="password" placeholder="请输入您的密码">
+                  </label>
+                   <label for="" id="success"></label>
+                  <label for="" class="u">
+                      <button type="submit">登陆</button>
+                      <button type="button" onclick="location.href='register.html'">注册</button>
+                  </label>
+                 
+            </form>
+        </div>
+    </div>
+    <script src="scripts/chat.js"></script>
+    <script>
+       // jQuery精修版
+       //jQuery实现刷新页面
+        $("link").each(function(index,element){
+            var href=$(element).attr('href');
+            $(element).attr('href',href+"?random="+Math.random());
+            // alert($(element).attr('href'));
+        });
+    // $("form").submit(function(ev){
+    //   ev.preventDefault();
+    //   var url = http+"api/loginSave.php";
+    //   var formData="send=1&username="+$("input").eq(0).val()+"&password="+$("input").eq(1).val();
+    //   // alert(formData);
+    //   $.post(url,formData,function(date,status){
+    //     $("#success").html($.parseJSON(date).message)
+    //     if ($.parseJSON(date).message=='登陆成功') {
+    //       window.location.href='index.html';
+    //     }
+    //   })    
+    // });
+function callback(e){
+      alert("温馨提示："+e)
+      console.log(e=="登陆成功")
+      if (e=="登陆成功") {
+        location.href="index.html"
+      }else{
+        $('#success').html(e)
+      }
+        
+      
+    }
+    $("form").submit(function(ev){
+      ev.preventDefault();
+      // var formData="send=1&username="+$("input").eq(0).val()+"&password="+$("input").eq(1).val();
+      // alert(formData);  
+      $.ajax({ 
+      url: 'http://hr1256337851.gz01.bdysite.com/7/api/loginSavew.php', 
+      type: 'GET', 
+      dataType: 'JSONP',             
+      jsonpCallback:"callback",
+      data:{
+        send:1,
+        username:$("input").eq(0).val(),
+        password:$("input").eq(1).val()
+      },
+      // jsonpCallback："a",
+      // success: function (res) { 
+      //   self.data = res.data.slice(0, 3) 
+      //   self.opencode = res.data[0].opencode.split(',')
+      //   alert(1) 
+      // },
+      error:function(){
+                 alert('fail');
+             }
+    })  
+    });
+    </script>
+</body>
+</html>

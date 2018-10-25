@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>0718留言系统</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script src="scripts/rem.js"></script>
+    <link rel="stylesheet" href="style/iconfont.css">
+    
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div id="app">
+        <header class="jumbotron text-center"></header>
+        <div class="container" style="margin-top:0">
+        <section class="chatList row">
+            <ul></ul>
+        </section>
+        <footer class="text-center" style="background:#d7d7d7"></footer>
+        </div>
+    </div>
+    <script src="scripts/chat.js" id="chatjs"></script>
+    <script>
+        $('header').html(header)
+        $('footer').html(footer)
+        if(!getCookie('username') || getCookie('username')==""){
+           location.href="login.html"
+        }
+        $("link").each(function(index,element){
+            var href=$(element).attr('href');
+            $(element).attr('href',href+"?random="+Math.random());
+            // alert($(element).attr('href'));
+        });
+        function getChatList(){
+              var url =  http+'api/getChatList.php?random='+Math.random();
+              $('.chatList ul').html('');
+              $.get(url,function(date,status){
+                if (status=='success') {
+                    var response=$.parseJSON(date);
+                    console.log(response);
+                    $(response).each(function(index,element){
+                        let firstName = element.title.substring(0,1);
+                        let title;
+                        if(element.title.length>20){
+                            title = element.title.substring(0,19)+"..."
+                        }else{
+                            title = element.title;
+                        }
+                        let body = element.body.substring(0,50)+"..."
+                        let createDate = element.createDate.substring(5)
+                        const id = element.chatId;
+                        var search=$('#search');
+                        console.log('search'+search.val());
+                        
+                        if (search.val()) 
+                            {
+                            if (element.title.match(search.val())||element.body.match(search.val())) {
+                                 $('.chatList ul').append(`
+                                    <li class="col-sm-4" onclick="location.href='chat.html?chatid=${id}'">
+                                        <div class="firstName">${firstName}</div>
+                                        <h4>
+                                            <a href="javascript:;">${title}</a>
+                                            <small>${body}</small>
+                                            <span class="createDate">${createDate}</span>
+                                        </h4>
+                                    </li>
+                                    `);
+                            }
+                            // console.log('查找成功');
+                            $('.chatList>ul>li').addClass("col-sm-4")
+                        }
+                        else{
+                        $('.chatList ul').append(`
+                            <li onclick="location.href='chat.html?chatid=${id}'">
+                                <div class="firstName">${firstName}</div>
+                                <h4>
+                                    <a href="javascript:;">${title}</a>
+                                    <small>${body}</small>
+                                    <span class="createDate">${createDate}</span>
+                                </h4>
+                            </li>
+                            `);
+                        }
+                       
+                    });
+                     var liLength=$('.chatList ul').children('li').length
+                        if (!liLength) {
+                            $('#search').attr('placeholder','未查找到相应聊天室');
+                            $('#search').val("")
+                        }
+                     $('.firstName').each(function(index,element){
+                        const bgColor = new Color();
+                        $(element).css("background-color",bgColor.color);
+                     });
+                }
+              });
+        }
+        getChatList();
+    </script>
+</body>
+</html>

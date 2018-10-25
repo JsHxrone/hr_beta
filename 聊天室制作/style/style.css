@@ -1,0 +1,586 @@
+*{
+    margin:0;
+    padding:0;
+    /*transition: all 600ms;*/
+}
+a{
+    text-decoration: none;
+    color:#333;
+}
+a:focus,
+a:hover{
+   color:#0c8b21;
+} 
+
+body{
+    background: #f1f1f1;
+    font-family: "微软雅黑",Arial, Helvetica, sans-serif;
+}
+ul,ol{
+    list-style: none;
+}
+
+#app{
+    height: 100vh;
+    width:100vw;
+    font-size:.5625rem;
+}
+
+footer{
+    position: fixed;
+    z-index: 9999;
+    left:0;
+    right:0;
+    width:100vw;
+}
+
+/*header{
+    top:0;
+    background: #0c8b21;
+    height:3.125rem;
+    line-height: 3.125rem;
+}*/
+
+header ul{
+    display: flex;
+    width:96%;
+    margin:0 auto;
+    justify-content: space-between;
+}
+header ul .logo{
+  left: .15625rem/* 5px */
+}
+header ul .logo a{
+    width: 3.125rem/* 100px */;
+    height: 3.125rem/* 100px */;
+    display: block;
+    background: #000;
+    border-radius: .3125rem/* 10px */
+}
+header ul .logo a img{
+  width: 100%;
+    height: 100%;
+    margin-right: .46875rem/* 15px */;
+    border-radius: .3125rem/* 10px */;
+}
+header ul li .icon-search{
+    font-size: 6vw;
+    color:#fff;
+    position: relative;
+    top: 5px;
+}
+header #search input {
+    border-radius: 5px;
+    height: 50%;
+    width: 60%;
+    margin-right: 2%;
+    text-indent: 1em;
+    background: #f6f6f6;
+}
+
+.chatList{
+    height:auto;
+}
+
+.chatList ul{
+    width:100%;
+    margin:0 auto;
+    display: flex;
+    flex-flow:column;
+    justify-content: space-between;
+}
+.chatList ul li{
+   display: flex;
+   justify-content: space-between;
+   height:auto;
+   min-height: 8vh;
+   overflow: hidden;
+   padding:.46875rem .3125rem;
+   border-bottom:1px solid #d7d7d7;
+}
+
+.chatList ul li .firstName{
+    width:12vw;
+    height:100%;
+    min-height: 2.5rem;
+    background: #222;
+    color:#fff;
+    /*line-height:2.5rem;*/
+    text-align: center;
+    font-size:1.5rem;
+    border-radius: .3125rem;
+    margin-right:.46875rem;
+}
+
+.chatList ul li h4{
+    width:80vw;
+   font-size: .85rem;
+   line-height: .875rem;
+   position: relative;
+}
+.chatList ul li h4 .createDate{
+   position: absolute;
+   right:0;
+   top:0;
+   font-size: 70%;
+   color:rgb(201, 201, 201);
+   font-weight: normal;
+}
+.chatList ul li h4 small{
+   display: block;
+   color:#666;
+   margin-top:0.4rem;
+   font-weight: normal;
+   font-size: 70%;
+}
+
+
+footer{
+    height:3.125rem;
+    background: #d7d7d7;
+    bottom:0;
+    border-top:1px solid #ddd;
+}
+
+footer ul{
+    display:flex;
+    justify-content: space-between;
+}
+
+footer ul li{
+    width:50%;
+    /*padding:.3125rem 0;*/
+    text-align:center;
+}
+
+
+.jumbotron{
+  padding: 1rem;
+  background:#bfbdbd
+}
+footer ul li a{
+    display: block;
+}
+footer ul li a i,
+footer ul li a span{
+    display: block;
+}
+footer ul li a i {
+    margin-bottom:.46875rem;
+    font-size: 1rem;
+}
+
+footer ul li a span{
+    font-size: 0.85rem;
+}
+
+footer ul .active a{
+    color:#0c8b21;
+}
+.jumbotron{
+  padding: 0.5rem;
+}
+
+/* 登陆页面 login */
+#login{
+
+}
+
+.container{
+   width:100%;
+   margin-top:20vh;
+}
+
+.container form{
+    width:70%;
+    margin: 0 auto;
+}
+.container form h1{
+    font-size: 1.2rem;
+    margin-bottom:.625rem;
+}
+.container form h1 small{
+    font-weight: normal;
+    padding:0 .46875rem;
+    color:#666;
+    font-size: 75%;
+}
+.container form label{
+   display: block;
+   margin-bottom:.5rem;
+}
+
+.container form label input{
+    height:2.5rem;
+    width:100%;
+    border-radius: .15625rem;
+    border:none;
+    text-indent: 1em;
+    outline: none;
+}
+
+.container form label button{
+    background: #0c8b21;
+    width:50%;
+    height:2.5rem;
+    border:none;
+    border-radius: .15625rem;
+    margin:.8rem auto;
+    display: block;
+    color:#fff;
+    font-size: 1rem;
+}
+
+.container form label#success{
+   height:.15625rem;
+   font-size: 0.75rem;
+   text-align: center;
+   padding:.3125rem 0;
+}
+
+
+#register {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    width:70%;
+    margin:15% auto 0;
+ }
+ 
+ #register h1{
+     font-size: 1.3rem;
+     margin-bottom:1rem
+ }
+ #register h1 small{
+     font-weight: normal;
+     font-size: 55%;
+ }
+ 
+ #register label{
+     width:100%;
+ }
+ 
+ #register label input{
+     margin:.5rem 0;
+     width:100%;
+     height:2.03125rem;
+     padding:0 .46875rem;
+     border:none;
+     outline: none;
+     border-radius: .15625rem;
+     background: #fff;
+ }
+ 
+ #register label button{
+     border-radius: .15625rem;
+     background: #0c8b21;
+     padding:.7rem 1.2rem;
+     border:none;
+     color: #fff;
+     display: block;
+     margin:0 auto;
+ }
+ 
+ #register  .success{
+     color:red;
+     text-align: center;
+     padding:.125rem;
+ }
+ .deleteBox{
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  position: absolute;
+  z-index: 9999;
+   top:0px;
+   -webkit-user-select:none; 
+  -webkit-touch-callout:none;
+}
+.box{
+  width: 150px;
+  height: 150px;
+  background: #eee;
+  margin:0 auto;
+  position: relative;
+  font-size: 1.25rem/* 40px */;
+  top:30vh;
+  z-index: 9999;
+  text-align: center;
+  border-radius:10px;
+  -webkit-user-select:none; 
+  -webkit-touch-callout:none;
+}
+.box p{
+  width: 150px;
+  height: 100px;
+  line-height: 100px;
+  font-size: 1.25rem/* 40px */;
+  
+  color: red
+}
+.box span{
+  width: 50%;
+  -webkit-user-select:none; 
+  -webkit-touch-callout:none;
+}
+.deleteBoxs{
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  position: absolute;
+  z-index: 9999;
+   top:0px;
+   -webkit-user-select:none; 
+  -webkit-touch-callout:none;
+}
+.boxs{
+  width: 150px;
+  height: 150px;
+  background: #eee;
+  margin:0 auto;
+  position: relative;
+  font-size: 1.25rem/* 40px */;
+  top:30vh;
+  z-index: 9999;
+  text-align: center;
+  border-radius:10px;
+  -webkit-user-select:none; 
+  -webkit-touch-callout:none;
+}
+.boxs p{
+  width: 150px;
+  height: 100px;
+  line-height: 100px;
+  font-size: 1.25rem/* 40px */;
+  
+  color: red
+}
+.boxs span{
+  width: 50%;
+  -webkit-user-select:none; 
+  -webkit-touch-callout:none;
+}
+.mask_layer{
+  display: none;
+  width: 100%;
+  height: 100%;
+  background:rgb(0,0,0,0.2);
+  z-index: 999999;
+}
+.touchArea{ 
+-webkit-user-select: none;/*禁用手机浏览器的用户选择功能 */
+-moz-user-select: none;
+}
+/*me界面*/
+.swiper-container{
+               position: fixed;
+               height: 100%;
+               width: 100%;
+               background: #EEEEEE;
+             }
+             /*.slide2 .swiper-slide{
+               background: #2AC3CB;
+             }*/
+             
+             #me .container section {
+        display: flex;
+        flex-flow: column;
+        padding-top: 4rem;
+       
+    }
+    /*.container{
+         margin-bottom: 2rem;
+    }*/
+    .icon-back {
+        font-size: 2rem;
+        color: #fff;
+    }
+
+     ol {
+        width: 100%;
+        background: #fff;
+        margin: .3125rem/* 10px */auto;
+        display: flex;
+        flex-flow: column;
+        padding:.825rem/* 20px */ 0;
+    }
+
+    ol li {
+        width: 85%;
+        margin: 0 auto;
+        font-size: .6875rem/* 22px */;
+    }
+    ol li .str{
+    border-bottom:1px solid #ddd;
+    height:1px;
+    margin:.78125rem/* 25px */ 0;
+    width:100%;
+    }
+     ol li.user{
+        display: flex;
+        flex-flow: row;
+     }
+    ol li.user a{
+    width: 3.125rem/* 100px */;
+     height: 3.125rem/* 100px */;
+    display: block;
+    background: #000;
+    border-radius: .3125rem/* 10px */
+    }
+    ol li h4 {
+        font-size: 0.85rem;
+        padding:0 .5rem
+    }
+
+    ol li h4 small {
+        display: block;
+        font-weight: normal;
+        font-size: 75%;
+        color: #666;
+    }
+
+    ol li i {
+        margin-right: .78125rem/* 25px */;
+        font-size:3rem;
+    }
+
+    ol li a img {
+        width:100%;
+        height:100%;
+        margin-right:.46875rem/* 15px */;
+        border-radius: .3125rem/* 10px */
+        ;
+    }
+
+
+    .phoneNumber{
+        position: absolute;
+        z-index: 9999;
+        width:100%;
+        top:0;
+        background:rgba(0,0,0,.5);
+        height:100vh;
+    }
+    #phone{
+        position: relative;
+        background: #eee;
+        width:12.25rem/* 200px */;
+        height:3.125rem;
+        margin:0 auto;
+        top: 10vh;
+        display: block;
+    }
+    .phoneNumber>#box>button{
+        position: relative;
+        background: #ec9999;
+        margin:.3125rem/* 10px */ auto;
+        top: 15vh;
+        width:6.5rem/* 100px */;
+        height:3.5625rem/* 50px */;
+        display: block;
+        border: none;
+        border-radius: .125rem/* 4px */
+    }
+    .phoneNumber>#box>#but{
+        position: relative;
+        background: red;
+        margin:0 auto;
+        top: 15vh;
+        width:6.5rem/* 100px */;
+        height:3.5625rem/* 50px */;
+        display: block;
+    }
+    #box .box_mes{
+      text-align: center;
+    }
+    #box label{
+      margin:0 auto;
+    font-size: 15px;
+  }
+  #box p{
+    margin:0 auto;
+    font-size: 15px;
+  }
+  #box #p{
+    padding-bottom: 1.5625rem/* 50px */
+  }
+  #box h2{
+    margin-bottom: 3.5625rem/* 50px */;
+    text-align: center;
+  }
+  .box_mes span{
+    color: red
+  }
+    .phoneNumber>#box{
+      position:relative;
+      top: 3vh;
+      background: #fff;
+      width: 70vw;
+      height: 80vh;
+      margin:0 auto;
+    }
+    .phoneNumber>#box>b{
+      height: 3vh;
+    }
+    #me .jumbotron{
+        padding: 0.5rem;
+
+    }
+    #me .container section{
+        margin-top:0;
+        
+    }
+    #me .container{
+      margin-top:0;
+    }
+    .footer_1{
+      position: fixed;
+      z-index: 9999;
+       height:3.125rem;
+       width: 100vw;
+       /*left: 46vh;*/
+      background: #d7d7d7;
+      bottom:0;
+      border-top:1px solid #ddd;
+    }
+     .footer_1 ul{
+    display:flex;
+    left: 0;
+    justify-content: space-between;
+}
+
+ .footer_1 ul li{
+    width:50%;
+    /*padding:.3125rem 0;*/
+    text-align:center;
+}
+.footer_1 ul li a{
+    display: block;
+}
+.footer_1 ul li a i,
+.footer_1 ul li a span{
+    display: block;
+}
+.footer_1 ul li a i {
+    margin-bottom:.46875rem;
+    font-size: 1rem;
+}
+
+.footer_1 ul li a span{
+    font-size: 0.85rem;
+}
+
+.footer_1 ul .active a{
+    color:#0c8b21;
+}
+.swiper-slide{
+  background: url(../images/1.jpg);
+}
+.swiper-slide{
+               background: #eee;
+             }
+
+#search{
+  border-radius: .15625rem/* 5px */;
+  border: none
+}

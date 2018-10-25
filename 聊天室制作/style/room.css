@@ -1,0 +1,157 @@
+.swiper-container{
+               position fixed;
+               height 100%;
+               width 100%;
+               background #EEEEEE;
+             }
+             .slide2 .swiper-slide{
+               background #2AC3CB;
+             }
+             #me .container section {
+        display flex;
+        flex-flow column;
+        padding-top 4rem;
+       
+    }
+    .container{
+         margin-bottom 2rem;
+    }
+    .icon-back {
+        font-size 2rem;
+        color #fff;
+    }
+
+     ol {
+        width 100%;
+        background #fff;
+        margin .3125rem 10px auto;
+        display flex;
+        flex-flow column;
+        padding.825rem 20px  0;
+    }
+
+    ol li {
+        width 85%;
+        margin 0 auto;
+        font-size .6875rem 22px ;
+    }
+    ol li .str{
+    border-bottom1px solid #ddd;
+    height1px;
+    margin.78125rem 25px  0;
+    width100%;
+    }
+     ol li.user{
+        display flex;
+        flex-flow row;
+     }
+    ol li.user a{
+    width 3.125rem 100px ;
+     height 3.125rem 100px ;
+    display block;
+    background #000;
+    border-radius .3125rem 10px 
+    }
+    ol li h4 {
+        font-size 0.85rem;
+        padding0 .5rem
+    }
+
+    ol li h4 small {
+        display block;
+        font-weight normal;
+        font-size 75%;
+        color #666;
+    }
+
+    ol li i {
+        margin-right .78125rem 25px ;
+        font-size3rem;
+    }
+
+    ol li a img {
+        width100%;
+        height100%;
+        margin-right.46875rem 15px ;
+        border-radius .3125rem 10px 
+        ;
+    }
+
+
+    .phoneNumber{
+        position absolute;
+        z-index 9999;
+        width100%;
+        top0;
+        backgroundrgba(0,0,0,.5);
+        height100vh;
+    }
+    #phone{
+        position relative;
+        background red;
+        width12.25rem 200px ;
+        height3.125rem;
+        margin0 auto;
+        top 20vh;
+        display block;
+    }
+    .phoneNumberbutton{
+        position relative;
+        background red;
+        margin0 auto;
+        top 22vh;
+        width6.5rem 100px ;
+        height3.5625rem 50px ;
+        display block;
+    }
+    #me .jumbotron{
+        padding 0.5rem;
+
+    }
+    #me .container section{
+        margin-top0;
+        
+    }
+    #me .container{
+      margin-top0;
+    }
+    .footer_1{
+      position fixed;
+      z-index 9999;
+       height3.125rem;
+       width 100vw;
+       left 46vh;
+      background #d7d7d7;
+      bottom0;
+      border-top1px solid #ddd;
+    }
+     .footer_1 ul{
+    displayflex;
+    left 0;
+    justify-content space-between;
+}
+
+ .footer_1 ul li{
+    width50%;
+    padding.3125rem 0;
+    text-aligncenter;
+}
+.footer_1 ul li a{
+    display block;
+}
+.footer_1 ul li a i,
+.footer_1 ul li a span{
+    display block;
+}
+.footer_1 ul li a i {
+    margin-bottom.46875rem;
+    font-size 1rem;
+}
+
+.footer_1 ul li a span{
+    font-size 0.85rem;
+}
+
+.footer_1 ul .active a{
+    color#0c8b21;
+}

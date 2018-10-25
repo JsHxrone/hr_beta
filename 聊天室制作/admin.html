@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+    <title>0718创建聊天室</title>
+    <script src="scripts/rem.js"></script>
+    <link rel="stylesheet" href="style/iconfont.css">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+     <style>
+          
+          #chatAdd{
+              width:70%;
+              margin:10vh auto;
+              padding:10px;
+          }
+          #chatAdd ul{
+              display: flex;
+              flex-flow: column;
+
+          }
+          #chatAdd ul li{
+              display: flex;
+              flex-flow: column;
+          }
+
+          #chatAdd ul li label{
+               margin:.5rem 0;
+           }
+           #chatAdd ul li input,
+           #chatAdd ul li textarea{
+               border-radius: .15625rem;
+               border:none;
+               height:1.5625rem;
+               padding:.3125rem;
+               outline: none;
+           }
+
+            #chatAdd ul li textarea{
+                height:5.125rem;
+
+            }
+            #chatAdd ul li #info{
+                color:red;
+                text-align: center;
+                font-size:.75rem;
+                margin-top: .46875rem;
+            }
+            #chatAdd ul li #info_1{
+                color:red;
+                text-align: center;
+                font-size:.75rem;
+                margin-top: .46875rem;
+            }
+             #chatAdd ul li button{
+                 border-radius: .3125rem;
+                 height:2.1875rem;
+                 margin-top:1rem;
+                 padding:.3125rem 0;
+                 border:none;
+                 outline: none;
+                 color:#fff;
+                 background: #0c8b21;
+             }
+     </style>
+</head>
+<body>
+    <header></header>
+    <div id="chatAdd">
+         <div id="form">
+            <ul>
+                <li>
+                    <label for="">聊天室名称</label>
+                    <input type="text" id="title" placeholder="请输入聊天室名称">
+                </li>
+                <li>
+                    <label for="">聊天室介绍</label>
+                    <textarea id="body" placeholder="请输入聊天室介绍" ></textarea>
+                </li>
+                <li>
+                   <span id="info"></span>
+                   <a href="index.html#app.html" id="info_1" style="display: none">返回聊天室</a>  
+                </li>
+                <li>
+                    <button type="button" id="send">创建聊天室</button>
+                </li>
+            </ul>
+         </div>
+    </div>
+    <footer></footer>
+    <script src="scripts/chat.js"></script>
+    <script>
+        if(getCookie('username')){
+            if(getCookie('userlevel')>0){
+                alert('您不是管理员！不能发布聊天室');
+                history.go(-1);
+            }
+        }else{
+            alert('您的登陆信息失效,请重新登陆');
+            location.href="login.html";
+        }
+        $("link").each(function(index,element){
+            var href=$(element).attr('href');
+            $(element).attr('href',href+"?random="+Math.random());
+        });
+        // $('header').html(header)
+        // $('footer').html(footer)
+        let send = $('#send');
+        let info = $('#info');
+        send.on('click',chatAdd)
+        function chatAdd(){
+            
+            let title = $('#title');
+            let body = $('#body'); 
+
+            if(title.val().length>10 ||　title.val().length<3){
+                info.html(title.placeholder);
+            }else{
+                info.html("");
+            }
+            
+            if(body.val().length>100 ||body.val().length<10){
+                info.html(body.placeholder);
+            }else{
+                info.html("");
+            }
+        
+            let formData = "send="+send.html()+"&title="+title.val()+"&body="+body.val();
+            let url = http+'api/chatAddSave.php?'+formData;
+            $.get(url,function(data){
+              var json = $.parseJSON(data);
+              console.log(json)
+              info.html(json.message);
+                    if (json.message == "聊天室创建成功") {
+                      $("#info_1").css({display:"block"})
+                    }
+                })
+        }
+    </script>
+</body>
+</html>

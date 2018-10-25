@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link rel="stylesheet" href="style/iconfont.css">
+<link rel="stylesheet" href="style/style.css">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+    <script src="scripts/chat.js" id="chatjs"></script>
+	<title>修改密码</title>
+	<style type="text/css">
+	h1{
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+		.u{
+      display:flex;
+      justify-content: space-around;
+     }
+     .u button{
+       width:20%;
+     }
+     .u button:nth-child(2){
+        background: orange
+      }
+      .img{
+      	width: 6.25rem/* 200px */;
+      	position: relative;
+      	left: 35vw;
+		 
+      }
+      .on_off{
+      	width: 1.5625rem/* 50px */;
+      	position: relative;
+      	color: red;
+      	text-align: center;
+      	line-height: 2.5rem;
+      }
+      #success{
+        color: red
+      }
+      .container{
+        margin-top: 5vh;
+      }
+	</style>
+</head>
+<body>
+	<div id="login">
+        <div class="container">
+        	<div><img class="img"></div>
+            <form>
+                  <h1></h1>
+                  <label for="" style="display:flex">
+                      <input type="password" name="oldPassword" placeholder="请输入您的原密码"><span class="on_off">*</span>
+                  </label>
+                  <label for="" style="display:flex">
+                      <input type="password" name="newPassword" placeholder="请输入您的新密码"><span class="on_off">*</span>
+                  </label>
+                  <label for="" style="display:flex">
+                      <input type="password" name="checkPassword" placeholder="请再次输入您的新密码"><span class="on_off">*</span>
+                  </label>
+                   <label for="" id="success"></label>
+                  <label for="" class="u">
+                      <button>确认修改</button>
+                      <button>返回</button>
+                  </label>
+                 
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+    	$.each($("input"),function(index){
+    		
+    		console.log(index)
+    		$(this).val("");
+    	})
+    	$.each($("span"),function(index){
+			console.log(index)
+    		$(this).click(function(){
+    			if ($(this).html() == "*") {
+    			$(this).html("!");
+    			$("input").eq(index).attr('type','text');
+    		}else{
+    			$(this).html("*");
+    			$("input").eq(index).attr('type','password');
+    		}
+    			
+    		})    		
+    	})
+    	function user() {
+        // let section = $('section');
+        var url = http + "api/getUser.php?userid=" + getCookie('userId');
+        $.get(url,function(data){
+                let json = $.parseJSON(data);
+                console.log(json)
+                let userAvatar
+                let userName
+                if (json[0].userAvatar) {
+                    userAvatar = json[0].userAvatar.substring(3);
+                } else {
+                    userAvatar = 'images/xiaoxin.jpg'
+                }
+                $(".img").eq(0).attr('src',userAvatar);
+                if (json[0].userName) {
+                    userName = json[0].userName;
+                } else {
+                    userName = '404'
+                }
+                // alert(userAvatar)
+                // alert(userName)
+                $("h1").eq(0).html(userName + "用户" + "<small>请您修改密码</small>")
+            })
+        }
+        user()
+    	$button = $("button").eq(1);
+    	// console.log($button)
+    	$button.on("click",function(){
+    		window.location.href='http://hr1256337851.gz01.bdysite.com/8/index.html';
+    		return false;
+    	})
+    	$("button").eq(0).on("click",function(ev){
+      ev.preventDefault();
+      var url = http+"api/password.php";
+      var formData="send=1&oldPassword="+$("input").eq(0).val()+"&newPassword="+$("input").eq(1).val()+"&checkPassword="+$("input").eq(2).val();
+      // alert(formData);
+      $.post(url,formData,function(date,status){
+      	$message = $.parseJSON(date).message;
+        $("#success").html($message);
+        if ($message=='请输入正确的原密码!点击*查看密码') {
+        	$("input").eq(0).css("color","red");
+        	$("input").eq(1).css("color","#333");
+        	$("input").eq(2).css("color","#333");
+        }else if ($message=='修改密码和确认修改密码不符合!点击*查看密码') {
+        	$("input").eq(0).css("color","#333");
+        	$("input").eq(1).css("color","red");
+        	$("input").eq(2).css("color","red");
+        }else if ($message=='用户密码修改成功!即将返回登录界面') {
+          alert($message)
+          window.location.href='login.html';
+          return false;
+        }
+      })    
+    });
+    </script>
+</body>
+</html>

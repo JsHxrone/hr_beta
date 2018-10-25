@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+    <title>0718聊天室注册</title>
+    <script src="scripts/mavatar.js"></script>
+    <link rel="stylesheet" href="style/iconfont.css">
+    <script src="scripts/rem.js"></script>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+    <style>
+    .avatarbox {width: 100%;  margin: 0 auto;}
+    #avatar{width: 100px; border:1px solid #000;margin:0 auto}
+             .icon-back{
+            font-size: 2rem;
+            color:#fff;
+         }
+    </style>
+</head>
+<body>
+         <header>
+             <ul>
+                 <li>
+                     <a href="login.html" class="icon iconfont icon-back"></a>
+                 </li>
+             </ul>
+         </header>
+    <form id="register">
+        <h1>新用户注册<small>欢迎您加入0718</small></h1>
+        <label class="avatarbox">
+           <div id="avatar"></div>
+       </label>
+        <label for="">
+            <input type="text" name="username" maxlength="6" id="username" placeholder="请输入您的帐号">
+        </label>
+        <label for="">
+            <input type="password" name="password" id="password" placeholder="请输入您的密码">
+        </label>
+        <label for="" class="success"></label>
+        <label for="">
+            <button type="submit">新用户注册</button>
+            <!-- <button onclick="clip()" class="button button-info" >裁剪</button> -->
+            <!-- <button onclick="reset()" class="button" >重置头像</button> -->
+        </label>
+    </form>
+    <script src="scripts/chat.js"></script>
+    <script>
+        $("link").each(function(index,element){
+            let href=$(element).attr('href');
+            $(element).attr('href',href+"?random="+Math.random());
+            // alert($(element).attr('href'));
+        });
+        $("script").each(function(index,element){
+            let src=$(element).attr('src');
+            $(element).attr('src',src+"?random="+Math.random());
+            // alert($(element).attr('href'));
+        });
+
+
+         let button = $('button');
+         // register.addEventListener('submit',clip,false);
+         button.on("click",clip);
+   var avatar = new Mavatar({el: '#avatar',width:'100px',height:'100px',fileOnchange: function (e) {
+      console.log(e)
+
+    }});
+  function clip(e) {
+    let usernameValue = $("#username").val();
+    let passwordValue = $("#password").val();
+    let success = $(".success").eq(0);
+    // let avatartx = $("#avatar").html()
+    // if (avatartx == "") {
+    //     alert("请上传您的头像")
+    // }else if (usernameValue = "") {
+    //   alert("请您输入账号")
+    // }else if (passwordValue = "") {
+    //   alert("请您输入密码")
+    // }
+    e.preventDefault();
+    avatar.imageClipper(function (data) {
+
+      // alert('裁剪成功，生成的图片已覆盖在上传框内');
+      //  将图片上传至后台
+      console.log(data)
+
+      let httpurl = http+'api/registerSave.php';
+      avatar.upload({
+        url: httpurl,
+        name: 'avatar',
+        data: {send:1,username:usernameValue, password: passwordValue,userAvatar:data},
+        success: function (responseText) {
+
+            console.log(responseText)
+            let data = $.parseJSON(responseText);
+            if(data.valid){
+                success.html(data.message + " | <a href='login.html'>登陆</a>")
+                // location.href='index.html';
+            }else{
+                success.html(data.message)
+            }
+
+
+        },
+        error: function (error) {
+          console.log(error)
+        },
+      });
+    })
+  }
+  function reset() {
+    avatar.resetImage();
+  }
+  //获取上传前信息
+  function getInfo() {
+    var fileInfo = avatar.getfileInfo();
+    console.log(fileInfo);
+  }
+  //获取base64
+  function getdata() {
+    var urldata = avatar.getDataUrl();
+    console.log(urldata);
+  }
+    </script>
+</body>
+</html>
